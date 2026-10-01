@@ -20,6 +20,11 @@ jobs:
           mkdir project
           unzip -q SKZ_LightSync_V0.2.zip -d project
 
+      - name: Aplicar V0.3
+        run: |
+          cp v03/app/src/main/java/com/skzlightsync/MainActivity.java \
+          project/SKZLightSync_V02/app/src/main/java/com/skzlightsync/MainActivity.java
+
       - name: Encontrar projeto Gradle
         run: |
           PROJECT_DIR=$(dirname "$(find project -type f -name settings.gradle -print -quit)")
@@ -45,5 +50,5 @@ jobs:
       - name: Salvar APK
         uses: actions/upload-artifact@v4
         with:
-          name: SKZ-LightSync-debug
+          name: SKZ-LightSync-V03-debug
           path: '**/build/outputs/apk/debug/*.apk'
