@@ -1,0 +1,49 @@
+name: Build SKZ LightSync APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Extrair projeto
+        run: |
+          rm -rf project
+          mkdir project
+          unzip -q SKZ_LightSync_V0.2.zip -d project
+
+      - name: Encontrar projeto Gradle
+        run: |
+          PROJECT_DIR=$(dirname "$(find project -type f -name settings.gradle -print -quit)")
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+          echo "Projeto encontrado em: $PROJECT_DIR"
+          find "$PROJECT_DIR" -maxdepth 3 -type f | sort
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '8.7'
+
+      - name: Compilar APK
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: gradle assembleDebug --stacktrace
+
+      - name: Salvar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SKZ-LightSync-debug
+          path: '**/build/outputs/apk/debug/*.apk'
