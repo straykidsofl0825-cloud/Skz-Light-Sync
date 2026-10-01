@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 }
 
 class LightSyncView extends View {
-
+long countdownStart = 0L;
     final Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
     final Paint stroke = new Paint(Paint.ANTI_ALIAS_FLAG);
     final Handler handler = new Handler();
@@ -433,22 +433,31 @@ class LightSyncView extends View {
 
         if(effect == 1) {
 
-            float wave =
-                (float)Math.sin(elapsed / 300.0);
+    float wave =
+        (float)Math.sin(elapsed / 300.0);
 
-            float brightness =
-                0.15f + 0.85f * ((wave + 1f)/2f);
+    float pulse =
+        (wave + 1f) / 2f;
 
-            int r = (int)
-                (Color.red(manualColor)*brightness);
+    int r = (int)(
+        Color.red(manualColor)
+        + (255 - Color.red(manualColor))
+        * pulse * 0.65f
+    );
 
-            int g = (int)
-                (Color.green(manualColor)*brightness);
+    int g = (int)(
+        Color.green(manualColor)
+        + (255 - Color.green(manualColor))
+        * pulse * 0.65f
+    );
 
-            int b = (int)
-                (Color.blue(manualColor)*brightness);
+    int b = (int)(
+        Color.blue(manualColor)
+        + (255 - Color.blue(manualColor))
+        * pulse * 0.65f
+    );
 
-            color = Color.rgb(r,g,b);
+    color = Color.rgb(r,g,b);
         }
 
         else if(effect == 2) {
