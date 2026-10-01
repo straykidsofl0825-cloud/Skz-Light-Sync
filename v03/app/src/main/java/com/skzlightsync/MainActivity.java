@@ -437,7 +437,7 @@ class LightSyncView extends View {
                 (float)Math.sin(elapsed / 300.0);
 
             float brightness =
-                0.55f + 0.45f * ((wave + 1f)/2f);
+                0.15f + 0.85f * ((wave + 1f)/2f);
 
             int r = (int)
                 (Color.red(manualColor)*brightness);
