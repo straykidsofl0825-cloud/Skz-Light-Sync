@@ -1,4 +1,4 @@
-package com.skzlightsync;
+package com.skzlightsync; 
 
 import android.app.Activity;
 import android.os.Bundle;
