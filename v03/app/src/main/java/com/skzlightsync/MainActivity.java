@@ -467,7 +467,39 @@ long countdownStart = 0L;
 
             color = colors[index];
         }
+else if(effect == 3) {
 
+    int index =
+        (int)((elapsed / 1200) % colors.length);
+
+    int baseColor = colors[index];
+
+    float wave =
+        (float)Math.sin(elapsed / 300.0);
+
+    float pulse =
+        (wave + 1f) / 2f;
+
+    int r = (int)(
+        Color.red(baseColor)
+        + (255 - Color.red(baseColor))
+        * pulse * 0.65f
+    );
+
+    int g = (int)(
+        Color.green(baseColor)
+        + (255 - Color.green(baseColor))
+        * pulse * 0.65f
+    );
+
+    int b = (int)(
+        Color.blue(baseColor)
+        + (255 - Color.blue(baseColor))
+        * pulse * 0.65f
+    );
+
+    color = Color.rgb(r, g, b);
+                }
         p.setColor(color);
 
         c.drawRect(
@@ -499,8 +531,13 @@ long countdownStart = 0L;
             effect == 0 ?
             "LUZ FIXA" :
             effect == 1 ?
-            "PULSANDO" :
-            "ALTERNANDO",
+          "PULSANDO" :
+          effect == 2 ?
+           "ALTERNANDO" :
+        "PULSAR + CORES",
+            
+        
+        
             getWidth()/2,
             235,
             18,
@@ -608,7 +645,7 @@ long countdownStart = 0L;
 
                 effect++;
 
-                if(effect > 2)
+                if(effect > 3)
                     effect = 0;
             }
 
