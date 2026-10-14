@@ -645,7 +645,7 @@ else if(effect == 3) {
 
                 effect++;
 
-                if(effect > 3)
+                if(effect > 4)
                     effect = 0;
             }
 
