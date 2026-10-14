@@ -395,20 +395,23 @@ long countdownStart = 0L;
 
         txt(
             c,
-            effect == 0 ? "Luz fixa" :
-            effect == 1 ? "Pulsar" :
-            "Alternar cores",
+         effect == 0 ? "Luz fixa" :
+         effect == 1 ? "Pulsar" :
+         effect == 2 ? "Alternar cores" :
+            "Pulsar + Cores",
             34,355,18,WHITE,true
         );
 
         txt(
             c,
-            effect == 0 ?
-            "A luz permanece na cor escolhida." :
-            effect == 1 ?
-            "A intensidade da luz pulsa." :
-            "As cores mudam automaticamente.",
-            34,382,12,MUTED,false
+     effect == 0 ?
+   "A luz permanece na cor escolhida." :
+     effect == 1 ?
+     "A intensidade da luz pulsa." :
+     effect == 2 ?
+     "As cores mudam automaticamente." :
+     "A luz pulsa e muda de cor.",        
+          34,382,12,MUTED,false
         );
 
         button(
@@ -645,7 +648,7 @@ else if(effect == 3) {
 
                 effect++;
 
-                if(effect > 4)
+                if(effect > 3)
                     effect = 0;
             }
 
